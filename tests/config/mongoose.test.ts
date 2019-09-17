@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { Connection } from 'mongoose';
-import { connectDB } from '../../src/config/mongoose';
+import connectDB from '../../src/config/mongoose';
 
 let mongoDB: Connection;
 
