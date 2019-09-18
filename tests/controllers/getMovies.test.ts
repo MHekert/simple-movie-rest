@@ -1,15 +1,17 @@
 import { expect, request } from 'chai';
+import { Server } from 'http';
+import { Connection } from 'mongoose';
 import connectDB from '../../src/config/mongoose';
 import getMovies from '../../src/controllers/getMovies';
-import IMovieModel from '../../src/interfaces/IMovieModel';
+import IMovieModel from '../../src/interfaces/movie/IMovieModel';
 import Movie from '../../src/models/movie/movie';
 import { PORT } from '../../src/util/secrets';
 import dummyMultipleMovies from '../dummy/dummyMultipleMovies';
 import app from '../dummy/serverSetup';
 
 describe('getMovies middleware', () => {
-	let server: any;
-	let mongoDB: any;
+	let server: Server;
+	let mongoDB: Connection;
 	let movies: IMovieModel[];
 
 	before(async () => {

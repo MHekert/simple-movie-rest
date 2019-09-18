@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import IMovieModel from '../../interfaces/IMovieModel';
+import IMovieModel from '../../interfaces/movie/IMovieModel';
 import clean from './helpers/clean';
 
 const movieSchema: Schema = new Schema({
