@@ -1,16 +1,16 @@
 import { NextFunction, Request, Response } from 'express';
-import Movie from '../models/movie/movie';
+import Comment from '../models/comment/comment';
 
 const getMovies = async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const { limit, skip } = req.params;
-		const movies = await Movie.find({})
+		const { movieId, limit, skip } = req.params;
+		const comments = await Comment.find({ movieId })
 			.sort({ _id: 1 })
 			.skip(+skip)
 			.limit(+limit)
 			.exec()
-			.then(movies => movies.map(m => m.clean()));
-		res.status(200).send(movies);
+			.then(comment => comment.map(c => c.clean()));
+		res.status(200).send(comments);
 	} catch (err) {
 		next(err);
 	}

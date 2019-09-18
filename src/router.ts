@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import { body, oneOf, param } from 'express-validator';
 import errorHandler from './controllers/errorHandler';
+import getComments from './controllers/getComments';
+import getCommentsByMovie from './controllers/getCommentsByMovie';
 import getMovies from './controllers/getMovies';
 import postComments from './controllers/postComments';
 import postMovies from './controllers/postMovies';
@@ -41,6 +43,37 @@ router.post(
 	validateRequest,
 	postComments
 );
+router.get(
+	'/comments/movie/:movieId/:limit?/:skip?',
+	[
+		param('limit')
+			.optional()
+			.isInt()
+			.toInt(),
+		param('skip')
+			.optional()
+			.isInt()
+			.toInt()
+	],
+	validateRequest,
+	getCommentsByMovie
+);
+router.get(
+	'/comments/:limit?/:skip?',
+	[
+		param('limit')
+			.optional()
+			.isInt()
+			.toInt(),
+		param('skip')
+			.optional()
+			.isInt()
+			.toInt()
+	],
+	validateRequest,
+	getComments
+);
+
 router.use(errorHandler);
 
 export default router;
