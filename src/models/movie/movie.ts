@@ -20,7 +20,7 @@ const movieSchema: Schema = new Schema({
 	ratings: [{ source: String, value: String }],
 	imdbRating: Number,
 	imdbVotes: Number,
-	imdbId: { type: String, unique: true },
+	imdbId: { type: String, unique: true, sparse: true },
 	type: { type: String, enum: ['movie', 'series', 'episode'] },
 	dvd: String,
 	boxOffice: Number,
