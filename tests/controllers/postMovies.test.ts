@@ -32,7 +32,7 @@ describe('postMovies middleware', () => {
 			.set('content-type', 'application/json')
 			.send(dummyUserMovie);
 		const { id, ...movie } = res.body;
-		expect(res).have.status(200);
+		expect(res).have.status(201);
 		expect(res.body).to.be.an('object');
 		expect(movie).to.be.deep.equal(merge(cloneDeep(dummyMovie), dummyUserMovie));
 	});

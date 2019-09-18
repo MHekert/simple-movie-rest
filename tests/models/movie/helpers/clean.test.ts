@@ -4,7 +4,7 @@ import Movie from '../../../../src/models/movie/movie';
 import dummyMovie from '../../../dummy/dummyMovie';
 
 describe(`Movie model's clean function`, () => {
-	it('should correctly create object', () => {
+	it('should correctly remove unnecessary properties from object', () => {
 		const movie = clean(new Movie(dummyMovie));
 		expect(movie).to.not.have.property('_id');
 		expect(movie).to.have.property('id');

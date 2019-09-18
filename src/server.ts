@@ -11,7 +11,7 @@ const app = express();
 
 connectDB();
 app.use(helmet());
-app.use(morgan('tiny'));
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(
 	bodyParser.urlencoded({

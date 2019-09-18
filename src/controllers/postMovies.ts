@@ -15,7 +15,7 @@ const postMovies = async (req: Request, res: Response, next: NextFunction) => {
 			return res.status(404).send({ code: 404, message: 'Movie does not exists' });
 		const movie = new Movie(merge(modelFromOmdb, modelFromRequest));
 		const dbResponse = await movie.save();
-		res.status(200).send(dbResponse.clean());
+		res.status(201).send(dbResponse.clean());
 	} catch (err) {
 		next(err);
 	}
