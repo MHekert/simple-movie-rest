@@ -15,7 +15,7 @@
     `git clone https://github.com/MHekert/simple-movie-rest`
 -   change directory to cloned/downloaded one
     `cd /path/to/project/directory`
--   create .env file ([go to example](#.env))`
+-   create .env file in root directory ([go to example](#env))
 -   install dependencies
     `yarn install`
 -   start MongoDB - linux: `sudo mongod` - windows: [follow installation guide](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
