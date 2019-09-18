@@ -1,7 +1,7 @@
 import { forEach, isArray, omitBy } from 'lodash';
-import EType from '../interfaces/EType';
-import IMovie from '../interfaces/IMovie';
-import IOmdb from '../interfaces/IOmdb';
+import EType from '../interfaces/movie/EType';
+import IMovie from '../interfaces/movie/IMovie';
+import IOmdb from '../interfaces/movie/IOmdb';
 
 const handleNA = (e: any) => (typeof e === 'string' && e === 'N/A' ? undefined : e);
 const handleArray = (e: string) => (!e ? undefined : e.split(',').map((el: string) => el.trim()));

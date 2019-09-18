@@ -1,9 +1,22 @@
 import { expect } from 'chai';
+import { Connection } from 'mongoose';
 import connectDB from '../../../src/config/mongoose';
 import Movie from '../../../src/models/movie/movie';
 import dummyMovie from '../../dummy/dummyMovie';
 
 describe('movie model', () => {
+	let mongoDB: Connection;
+
+	before(async () => {
+		mongoDB = await connectDB();
+		await Movie.deleteMany({});
+	});
+
+	after(async () => {
+		await Movie.deleteMany({});
+		await mongoDB.close();
+	});
+
 	it('should correctly create object', () => {
 		const movie = new Movie(dummyMovie);
 		expect(movie).to.have.property('_id');
@@ -20,8 +33,6 @@ describe('movie model', () => {
 	});
 
 	it('should throw error when trying to save movie with duplicate imdbId', async () => {
-		const mongoDB = await connectDB();
-		await Movie.deleteMany({});
 		await new Movie(dummyMovie).save();
 		let isError = false;
 		try {
@@ -30,6 +41,5 @@ describe('movie model', () => {
 			isError = true;
 		}
 		expect(isError).to.equal(true);
-		return mongoDB.close();
 	});
 });

@@ -1,5 +1,7 @@
 import { expect, request } from 'chai';
+import { Server } from 'http';
 import { cloneDeep, merge } from 'lodash';
+import { Connection } from 'mongoose';
 import connectDB from '../../src/config/mongoose';
 import postMovies from '../../src/controllers/postMovies';
 import Movie from '../../src/models/movie/movie';
@@ -9,8 +11,8 @@ import dummyUserMovie from '../dummy/dummyUserMovie';
 import app from '../dummy/serverSetup';
 
 describe('postMovies middleware', () => {
-	let server: any;
-	let mongoDB: any;
+	let server: Server;
+	let mongoDB: Promise<Connection>;
 
 	before(async () => {
 		app.post('/movies', postMovies);
@@ -21,7 +23,7 @@ describe('postMovies middleware', () => {
 
 	after(async () => {
 		await Movie.deleteMany({});
-		return Promise.all([server.close(), mongoDB.close()]);
+		return Promise.all([server.close(), (await mongoDB).close()]);
 	});
 
 	beforeEach(async () => Movie.deleteMany({}));

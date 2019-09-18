@@ -2,9 +2,10 @@ import { Router } from 'express';
 import { body, oneOf, param } from 'express-validator';
 import errorHandler from './controllers/errorHandler';
 import getMovies from './controllers/getMovies';
+import postComments from './controllers/postComments';
 import postMovies from './controllers/postMovies';
 import validateRequest from './controllers/validateRequest';
-import EType from './interfaces/EType';
+import EType from './interfaces/movie/EType';
 
 const router = Router();
 
@@ -33,6 +34,12 @@ router.get(
 	],
 	validateRequest,
 	getMovies
+);
+router.post(
+	'/comments',
+	[body('movieId').isMongoId(), body('content').isString()],
+	validateRequest,
+	postComments
 );
 router.use(errorHandler);
 

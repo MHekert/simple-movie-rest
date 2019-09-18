@@ -1,13 +1,8 @@
-import { pick } from 'lodash';
-import IMovieModel from '../../../interfaces/IMovieModel';
-import getSchemaPaths from '../../../util/getSchemaPaths';
-import Movie from '../movie';
+import IMovieModel from '../../../interfaces/movie/IMovieModel';
+import cleanId from '../../../util/cleanId';
 
 const clean = (movie: IMovieModel) => {
-	const modelProperties = getSchemaPaths(Movie);
-	const id = movie._id;
-	const cleanMovie = pick(movie, modelProperties);
-	cleanMovie.id = id;
+	const cleanMovie = <IMovieModel>cleanId(movie);
 	cleanMovie.ratings = movie.ratings.map((el: { _id: any; source: string; value: string }) => {
 		const { source, value } = el;
 		return { source, value };
